@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from bootstrap_modal_forms.generic import BSModalCreateView, BSModalUpdateView
+from bootstrap_modal_forms.generic import BSModalCreateView, BSModalUpdateView, BSModalReadView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from meeting.forms import AppointmentForm
@@ -37,7 +37,15 @@ class AppointUpdate(BSModalUpdateView, LoginRequiredMixin):
 class AppointList(ListView, LoginRequiredMixin):
     login_url = 'login'
     model = Appointment
-    queryset = Appointment.objects.all()
+    queryset = Appointment.objects.order_by('-published')
     context_object_name = 'meetings'
     template_name = 'meeting/index.html'
     paginate_by = 50
+
+
+class AppointDetail(BSModalReadView, LoginRequiredMixin):
+    login_url = 'login'
+    model = Appointment
+    template_name = 'meeting/detail.html'
+    queryset = Appointment.objects.all()
+    context_object_name = 'appoint'
