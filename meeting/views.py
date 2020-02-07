@@ -9,7 +9,7 @@ from meeting.models import Appointment
 
 # Create your views here.
 
-class AppointCreate(BSModalCreateView, LoginRequiredMixin):
+class AppointCreate(LoginRequiredMixin, BSModalCreateView):
     login_url = 'login'
     form_class = AppointmentForm
     template_name = 'meeting/create.html'
@@ -21,7 +21,7 @@ class AppointCreate(BSModalCreateView, LoginRequiredMixin):
         return super().form_valid(form)
 
 
-class AppointUpdate(BSModalUpdateView, LoginRequiredMixin):
+class AppointUpdate(LoginRequiredMixin, BSModalUpdateView):
     login_url = 'login'
     form_class = AppointmentForm
     queryset = Appointment.objects.all()
@@ -34,13 +34,13 @@ class AppointUpdate(BSModalUpdateView, LoginRequiredMixin):
         return super().form_valid(form)
 
 
-class AppointList(ListView, LoginRequiredMixin):
+class AppointList(LoginRequiredMixin, ListView):
     login_url = 'login'
     model = Appointment
     queryset = Appointment.objects.order_by('-published')
     context_object_name = 'meetings'
     template_name = 'meeting/index.html'
-    paginate_by = 10
+    paginate_by = 3
 
 
 class AppointDetail(BSModalReadView, LoginRequiredMixin):
