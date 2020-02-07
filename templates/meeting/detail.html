@@ -1,19 +1,19 @@
 <div class="modal-header">
-  <h3 class="modal-title">{{ appoint.first_Name }} &nbsp; {{ appoint.last_Name }} Details </h3>
+  <h3 class="modal-title">{{ appoint.first_Name }}  {{ appoint.last_Name }} Details </h3>
   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 
 <div class="modal-body">
-<h1 class="text-center text-uppercase">NIC: {{ appoint.NIC }}</h1>
+<h1 class="text-center text-uppercase text-primary">NIC: {{ appoint.NIC }}</h1>
 <p>
-Address: {{ appoint.address|upper }}<br>
-Region : {{ appoint.address.region|upper }}<br>
-Telephone: {{ appoint.telephone|upper }}<br>
-Number of Children: {{ appoint.children }}<br>
-Marital Status: {{ appoint.marital_Status|upper }}<br>
-{{ appoint.reasons|linebreaksbr }}
+<span class="text-primary text-uppercase">Address:</span> {{ appoint.address|upper }} <br>
+<span class="text-primary text-uppercase">Region:</span> {{ appoint.address.region|upper }}<br>
+<span class="text-primary text-uppercase">Telephone:</span> {{ appoint.telephone|upper }}<br>
+<span class="text-primary text-uppercase">Number of Children:</span> {{ appoint.children }}<br>
+<span class="text-primary text-uppercase">Marital Status:</span> {{ appoint.marital_Status|upper }}<br>
+<span class="text-primary text-uppercase">Reasons:</span> {{ appoint.reasons|linebreaksbr }}
 </p>
 <div class=" text-muted" align='right'>
 {{appoint.published|date}} <br>
