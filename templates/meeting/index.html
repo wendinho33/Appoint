@@ -76,33 +76,11 @@ Appointments
           <td><button class=" meeting_update btn btn-outline-danger" data-id="{% url 'meeting-update' meeting.slug %}">Update</button></td>
 {% endif %}
   </tr>
-
-
-
   {% endfor %}
-
-    <tr>
-
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
   </tbody>
 </table>
-
-{% endif %} 
+{% include 'pagination.html' %}
+{% endif %}
 {% endif %}
 
     <script>
