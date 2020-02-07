@@ -3,9 +3,11 @@
 Appointments
 {% endblock %}
 {% block main %}
+
+    <button class="create_appoint btn btn-outline-primary" >Create New Appoint</button>
 {% if request.user.is_authenticated %}
 {% if request.user.is_staff %}
-    <table class="table table-dark">
+    <table class="table table-dark table-bordered">
   <thead>
     <tr>
       <th scope="col">First Name</th>
@@ -21,13 +23,23 @@ Appointments
   </thead>
   <tbody>
   {% for meeting in meetings %}
-  <tr>
-  <td>{{ meeting.first_Name|upper }}</td>
-  <td>{{ meeting.last_Name|upper}}</td>
-  <td>{{ meeting.NIC|upper }}</td>
-  <td>{{ meeting.telephone|upper }}</td>
-  <td>{{ meeting.address|upper }}</td>
-  <td>{{ meeting.address.region|upper }}</td>
+      {% if meeting.status == "pending" %}
+      <tr>
+          <td>{{ meeting.first_Name|upper }}</td>
+          <td>{{ meeting.last_Name|upper}}</td>
+          <td>{{ meeting.NIC|upper }}</td>
+          <td>{{ meeting.telephone|upper }}</td>
+          <td>{{ meeting.address|upper }}</td>
+          <td>{{ meeting.address.region|upper }}</td>
+
+      {% endif %}
+
+
+
+
+
+
+
   </tr>
       <tr>
       <td></td>
@@ -56,5 +68,12 @@ Appointments
 </table>
 
 {% endif %} 
-{% endif %} 
+{% endif %}
+
+    <script>
+    $(document).ready(function(){
+        $(".create_appoint").modalForm({formURL: "{% url 'meeting-create' %}"});
+
+    })
+</script>
 {% endblock %}
