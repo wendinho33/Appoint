@@ -73,7 +73,7 @@ Appointments
           <td>{{ meeting.address.region|upper }}</td>
           <td>{{ meeting.status|upper }}</td>
           <td></td>
-          <td><button class=" meeting_update btn btn-outline-danger." data-id="{% url 'meeting-update' meeting.slug %}">Update</button></td>
+          <td><button class=" meeting_update btn btn-outline-danger" data-id="{% url 'meeting-update' meeting.slug %}">Update</button></td>
 {% endif %}
   </tr>
 
