@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+
+        {% endblock %}
+    </title>
+{% include 'stylesheet.html' %}
+{% include 'javascript.html' %}
+</head>
+<body>
+{% include 'message.html' %}
+{% include 'header.html' %}
+
+
+{% block main %}
+
+{% endblock %}
+{% include 'footer.html' %}
+
+</body>
+</html>
