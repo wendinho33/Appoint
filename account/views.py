@@ -17,7 +17,7 @@ def user_login(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, 'welcome' + ' ' + request.user.username)
-                return redirect('home')
+                return redirect('meeting-list')
             else:
                 messages.warning(request, 'please try again')
                 return redirect('login')
