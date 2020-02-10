@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'crispy_forms',
     'phonenumber_field',
+    'django.contrib.postgres',
     'bootstrap_modal_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -83,8 +84,12 @@ WSGI_APPLICATION = 'appoint.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'appoint',
+        'USER': 'marius',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
