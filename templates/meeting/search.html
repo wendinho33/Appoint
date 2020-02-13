@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% block title %}
-Appointments
+Search Results
 {% endblock %}
-{% block main %}
 
-    <button class="create_appoint btn btn-outline-primary" >Create New Appoint</button>
-{% if request.user.is_authenticated %}
-{% if request.user.is_staff %}
+{% block main %}
+    {% with object_list.count as results_count %}
+    <h2 class="text-center text-uppercase">Result{{ results_count| pluralize }} Found {{ results_count }} </h2>
+    {% endwith %}
+
     <table class="table table-dark table-bordered">
   <thead>
     <tr>
@@ -17,14 +18,13 @@ Appointments
       <th scope="col">Address</th>
       <th scope="col">Region</th>
       <th scope="col">Status</th>
-      <th scope="col">Meeting Date</th>
       <th scope="col">View</th>
       <th scope="col">Update</th>
 
     </tr>
   </thead>
   <tbody>
-  {% for meeting in meetings %}
+  {% for meeting in object_list %}
       {% if meeting.status == "pending" %}
           <tr class="bg-info">
           <td>{{ meeting.first_Name|upper }}</td>
@@ -34,7 +34,6 @@ Appointments
           <td>{{ meeting.address|upper }}</td>
           <td>{{ meeting.address.region|upper }}</td>
           <td>{{ meeting.status|upper }}</td>
-          <td>{{ meeting.created_at|date}}</td>
           <td><button class="meeting_detail btn btn-outline-light" data-id="{% url 'meeting-detail' meeting.slug %}">View</button></td>
           <td><button class=" meeting_update btn btn-outline-danger" data-id="{% url 'meeting-update' meeting.slug %}">Update</button></td>
         {% endif %}
@@ -48,7 +47,6 @@ Appointments
           <td>{{ meeting.address|upper }}</td>
           <td>{{ meeting.address.region|upper }}</td>
           <td>{{ meeting.status|upper }}</td>
-          <td>{{ meeting.created_at|date}}</td>
           <td><button class="meeting_detail btn btn-outline-light" data-id="{% url 'meeting-detail' meeting.slug %}">View</button></td>
           <td><button class=" meeting_update btn btn-outline-danger" data-id="{% url 'meeting-update' meeting.slug %}">Update</button></td>
       {% endif %}
@@ -62,7 +60,6 @@ Appointments
           <td>{{ meeting.address|upper }}</td>
           <td>{{ meeting.address.region|upper }}</td>
           <td>{{ meeting.status|upper }}</td>
-          <td>{{ meeting.created_at|date}}</td>
           <td><button class="meeting_detail btn btn-outline-light" data-id="{% url 'meeting-detail' meeting.slug %}">View</button></td>
           <td><button class=" meeting_update btn btn-outline-danger" data-id="{% url 'meeting-update' meeting.slug %}">Update</button></td>
       {% endif %}
@@ -76,7 +73,6 @@ Appointments
           <td>{{ meeting.address|upper }}</td>
           <td>{{ meeting.address.region|upper }}</td>
           <td>{{ meeting.status|upper }}</td>
-          <td>{{ meeting.created_at|date}}</td>
           <td><button class="meeting_detail btn btn-outline-light" data-id="{% url 'meeting-detail' meeting.slug %}">View</button></td>
           <td><button class=" meeting_update btn btn-outline-danger" data-id="{% url 'meeting-update' meeting.slug %}">Update</button></td>
 {% endif %}
@@ -84,11 +80,9 @@ Appointments
   {% endfor %}
   </tbody>
 </table>
-{% include 'pagination.html' %}
-{% endif %}
-{% endif %}
 
-    <script>
+
+        <script>
     $(document).ready(function(){
         $(".create_appoint").modalForm({formURL: "{% url 'meeting-create' %}"});
 
@@ -102,5 +96,4 @@ Appointments
 
     })
 </script>
-
 {% endblock %}

@@ -1,9 +1,10 @@
-from django.shortcuts import render
 from bootstrap_modal_forms.generic import BSModalCreateView, BSModalUpdateView, BSModalReadView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
-from meeting.forms import AppointmentForm
+from django.db.models import Q
 from django.urls import reverse_lazy
+from django.views.generic import ListView
+
+from meeting.forms import AppointmentForm
 from meeting.models import Appointment
 
 
@@ -49,3 +50,17 @@ class AppointDetail(BSModalReadView, LoginRequiredMixin):
     template_name = 'meeting/detail.html'
     queryset = Appointment.objects.all()
     context_object_name = 'appoint'
+
+
+class AppointSearch(LoginRequiredMixin, ListView):
+    model = Appointment
+    template_name = 'meeting/search.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = Appointment.objects.filter(
+            Q(first_Name__icontains=query) | Q(last_Name__icontains=query) | Q(NIC__istartswith=query) | Q(
+                address__region__contains=query) \
+            | Q(status__contains=query) | Q(address__address__startswith=query) | Q(telephone__exact=query)
+        )
+        return object_list
