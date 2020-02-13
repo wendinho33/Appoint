@@ -1,14 +1,38 @@
-from bootstrap_modal_forms.generic import BSModalCreateView, BSModalUpdateView, BSModalReadView
+from bootstrap_modal_forms.generic import BSModalCreateView, BSModalUpdateView, BSModalReadView, BSModalDeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 
-from meeting.forms import AppointmentForm
-from meeting.models import Appointment
+from meeting.forms import AppointmentForm, AddressForm
+from meeting.models import Appointment, Place_Of_Residence
 
 
 # Create your views here.
+class AddressCreate(LoginRequiredMixin, BSModalCreateView):
+    login_url = 'login'
+    form_class = AddressForm
+    template_name = 'meeting/address.html'
+    success_message = 'Address successfully Created'
+    success_url = reverse_lazy('meeting-list')
+
+
+class AddressUpdate(LoginRequiredMixin, BSModalUpdateView):
+    login_url = 'login'
+    form_class = AddressForm
+    template_name = 'meeting/address_update.html'
+    queryset = Place_Of_Residence.objects.all()
+    success_message = 'Address successfully Added'
+    success_url = reverse_lazy('address-list')
+
+
+class AddressList(LoginRequiredMixin, ListView):
+    login_url = 'login'
+    model = Place_Of_Residence
+    queryset = Place_Of_Residence.objects.all()
+    template_name = 'meeting/address_list.html'
+    context_object_name = 'addresses'
+
 
 class AppointCreate(LoginRequiredMixin, BSModalCreateView):
     login_url = 'login'

@@ -5,7 +5,7 @@
         <div class="container">
           <button aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarTogglerDemo03" data-toggle="collapse" type="button"><i aria-hidden="true" class="fa fa-bars"></i></button> <a class="navbar-brand" href="{% url 'home' %}">Appoint</a>
           <div class="km-navbar-brand-btn-container">
-            <a href="{% url 'logout' %}">LOGOUT</a> <a href="#">SIGN UP</a>
+            <a href="{% url 'logout' %}">LOGOUT</a> <a href="#" class="address_create">Address</a> <a href="#" class="create_appoint">Appoint</a>
           </div>
         </div>
       </div>
@@ -20,7 +20,7 @@
                 <a class="nav-link" href="{% url 'meeting-list' %}">Appointments</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Our Products</a>
+                <a class="nav-link" href="{% url 'address-list' %}">Address</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Blog</a>
@@ -29,8 +29,8 @@
                 <a class="nav-link" href="#">Contact Us</a>
               </li>
             </ul>
-              <form class="form-inline mt-2 mt-md-0" action="{% url 'search_meeting' %}" method="get">
-                  <input class="form-control mr-sm-2" type="text" placeholder="Search" name="q" aria-label="Search">
+              <form class="form-inline mt-2 mt-md-0" action="{% url 'search_meeting' %}" method="get" style="width: 80%">
+                  <input class="form-control mr-sm-2" type="text" placeholder="Search" name="q" aria-label="Search" style="width:100%;">
                   <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
               </form>
           </div>
@@ -39,3 +39,9 @@
     </nav>
   </header><!-- /header -->
 {% endif %}
+<script>
+$(document).ready(function(){
+        $(".address_create").modalForm({formURL: "{% url 'address-create' %}"});
+        $(".create_appoint").modalForm({formURL: "{% url 'meeting-create' %}"});
+    })
+</script>

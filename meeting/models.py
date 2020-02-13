@@ -9,7 +9,7 @@ from django.urls import reverse
 # Create your models here.
 
 class Place_Of_Residence(models.Model):
-    address = models.CharField(max_length=255)
+    address = models.CharField(max_length=255, unique=True)
     REGION = (
         ('1', '1'),
         ('2', '2'),

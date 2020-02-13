@@ -4,7 +4,6 @@ Appointments
 {% endblock %}
 {% block main %}
 
-    <button class="create_appoint btn btn-outline-primary" >Create New Appoint</button>
 {% if request.user.is_authenticated %}
 {% if request.user.is_staff %}
     <table class="table table-dark table-bordered">
@@ -90,7 +89,6 @@ Appointments
 
     <script>
     $(document).ready(function(){
-        $(".create_appoint").modalForm({formURL: "{% url 'meeting-create' %}"});
 
         $(".meeting_update").each(function () {
             $(this).modalForm({formURL: $(this).data('id')});
