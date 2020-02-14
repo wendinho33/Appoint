@@ -13,7 +13,7 @@ class IndexView(LoginRequiredMixin, ListView):
     login_url = 'login'
     model = Appointment
     template_name = 'home/index.html'
-    queryset = Appointment.objects.latest('published')
+    queryset = Appointment.objects.all().latest('published')
     context_object_name = 'appointment'
 
 

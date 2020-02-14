@@ -77,6 +77,7 @@ class AppointDetail(BSModalReadView, LoginRequiredMixin):
 
 
 class AppointSearch(LoginRequiredMixin, ListView):
+    login_url = 'login'
     model = Appointment
     template_name = 'meeting/search.html'
 

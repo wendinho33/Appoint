@@ -13,11 +13,15 @@
 <span class="text-primary text-uppercase">Telephone:</span> {{ appoint.telephone|upper }}<br>
 <span class="text-primary text-uppercase">Number of Children:</span> {{ appoint.children }}<br>
 <span class="text-primary text-uppercase">Marital Status:</span> {{ appoint.marital_Status|upper }}<br>
-<span class="text-primary text-uppercase">Reasons:</span> {{ appoint.reasons|linebreaksbr }}
+<span class="text-primary text-uppercase">Reasons:</span> {{ appoint.reasons|linebreaksbr }}<br>
+    {% if request.user.is_superuser %}
+        <span class="text-primary text-uppercase">Remarks:</span> {{ appoint.remarks|linebreaksbr }}<br>
+    {% endif %}
+
 </p>
-<div class=" text-muted" align='right'>
+<div style="text-align: right;" class=" text-muted">
 {{appoint.published|date}} <br>
-created by: {{appoint.staff}}
+updated by: {{appoint.staff}}
 </div>
 </div>
 
