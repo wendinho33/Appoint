@@ -43,6 +43,17 @@ class Appointment(models.Model):
         ('14', '14'),
 
     )
+    REASON_CHOICES = (
+        ('', ''),
+        ('Social Aid', 'Social Aid'),
+        ('BIP', 'BIP'),
+        ('Industrial Relations,', 'Industrial Relations,'),
+        ('employment', 'employment'),
+        ('Housing', ' Housing'),
+        ('NEF', 'NEF'),
+        ('Consumer protection', 'Consumer protection'),
+        ('other', 'other'),
+    )
     MARITAL_STATUS = (
         ('single', 'single'),
         ('married', 'married'),
@@ -64,7 +75,8 @@ class Appointment(models.Model):
     address = models.ForeignKey(Place_Of_Residence, on_delete=models.CASCADE)
     children = models.CharField(max_length=12, choices=CHILDREN_NUMBER_CHOICES, default='0')
     marital_Status = models.CharField(max_length=20, choices=MARITAL_STATUS, default='single')
-    reasons = models.TextField()
+    reasons = models.CharField(max_length=255, choices=REASON_CHOICES, default='')
+    remarks = models.TextField(blank=True, )
     status = models.CharField(max_length=14, choices=STATUS_CHOICES, default='pending')
     published = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField(auto_now_add=True)

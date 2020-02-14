@@ -65,7 +65,7 @@ class AppointList(LoginRequiredMixin, ListView):
     queryset = Appointment.objects.order_by('-published')
     context_object_name = 'meetings'
     template_name = 'meeting/index.html'
-    paginate_by = 3
+    paginate_by = 10
 
 
 class AppointDetail(BSModalReadView, LoginRequiredMixin):

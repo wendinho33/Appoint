@@ -1,0 +1,34 @@
+{% extends 'base.html'%}
+{% block title %}
+Users
+{% endblock %}
+{% block main %}
+    {% if request.user.is_authenticated %}
+        {% if request.user.is_superuser %}
+            <table class="table table-hover table-bordered table-dark">
+            <thead>
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Last Login</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                <td>{{ user.username }}</td>
+                <td>{{user.last_login}}</td>
+            {% endfor%}
+            </tr>
+            </tbody>
+            </table>
+        {% else %}
+            <h1 class="text-center text-uppercase text-danger">You are not allowed on this page</h1>
+        {% endif %}
+    {% endif %}
+    <style>
+        .table{
+            margin: auto;
+            width: 50%;
+        }
+    </style>
+{% endblock %}
