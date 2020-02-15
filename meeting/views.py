@@ -86,6 +86,7 @@ class AppointSearch(LoginRequiredMixin, ListView):
         object_list = Appointment.objects.filter(
             Q(first_Name__icontains=query) | Q(last_Name__icontains=query) | Q(NIC__istartswith=query) | Q(
                 address__region__contains=query) \
-            | Q(status__contains=query) | Q(address__address__startswith=query) | Q(telephone__exact=query)
+            | Q(status__contains=query) | Q(address__address__istartswith=query) | Q(telephone__exact=query) \
+            | Q(reasons__icontains=query)
         )
         return object_list

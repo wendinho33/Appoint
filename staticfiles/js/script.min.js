@@ -1,0 +1,1 @@
+jQuery(document).on("click",".navbar-nav > .dropdown",function(o){o.stopPropagation()}),$(".dropdown-submenu").click(function(){$(".dropdown-submenu > .dropdown-menu").toggleClass("show")});
