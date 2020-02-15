@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from meeting.models import Appointment
 from django.contrib.auth.models import User
@@ -9,17 +9,14 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-class IndexView(LoginRequiredMixin, ListView):
+class IndexView(LoginRequiredMixin, TemplateView):
     login_url = 'login'
-    model = Appointment
     template_name = 'home/index.html'
-    queryset = Appointment.objects.all().latest('published')
-    context_object_name = 'appointment'
 
 
 class UsersView(LoginRequiredMixin, ListView):
     login_url = 'login'
-    model = Appointment
+    model = User
     template_name = 'home/users.html'
     queryset = User.objects.all()
     context_object_name = 'users'
