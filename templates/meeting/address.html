@@ -5,7 +5,7 @@
   <div class="modal-header">
     <h3 class="modal-title text-uppercase text-center text-primary">New Address</h3>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
+      <span aria-hidden="true"><span class="fa fa-close"></span></span>
     </button>
   </div>
 
@@ -20,5 +20,31 @@
         .btn{
             border-radius: 30px;
         }
+        .fa-close:hover{
+            color: red;
+        }
     </style>
 </form>
+<script>
+$('#id_address').keyup(function(){
+    let address = $(this).val();
+
+    $.ajax({
+        url: '/appoint/address/validate',
+        data: {
+            address: address
+
+        },
+        dataType: 'json',
+        success: function (data) {
+            if(data.is_taken)
+                $('#id_address').css('border-bottom', 'solid 4px red');
+            else
+                $('#id_address').css('border-bottom', 'solid 4px green');
+
+        }
+
+
+    })
+})
+</script>

@@ -1,16 +1,14 @@
-{% load crispy_forms_tags %}
 <form method="post" action="" enctype="multipart/form-data">
-  {% csrf_token %}
 
   <div class="modal-header">
     <h3 class="modal-title text-uppercase text-center text-primary">Create New Appointment</h3>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
+      <span aria-hidden="true"><span class="fa fa-close"></span></span>
     </button>
   </div>
 
   <div class="modal-body">
-  {{form|crispy}}
+  {% include 'forms.html' %}
   </div>
 
   <div class="modal-footer">
@@ -20,5 +18,76 @@
         .btn{
             border-radius: 30px;
         }
+        .fa-close:hover{
+            color: red;
+        }
     </style>
 </form>
+
+<script>
+$('#id_first_Name').change(function(){
+    let first_Name = $(this).val();
+
+    $.ajax({
+        url: '{% url 'meeting-validate' %}',
+        data: {
+            first_Name: first_Name,
+
+        },
+        dataType: 'json',
+        success: function (data) {
+            if(data.exists)
+                $('#id_first_Name').css('border-bottom', 'solid 4px red');
+            else
+                $('#id_first_Name').css('border-bottom', 'solid 4px green');
+
+        }
+
+
+    })
+});
+
+$('#id_last_Name').change(function(){
+    let last_Name = $(this).val();
+
+    $.ajax({
+        url: '{% url 'meeting-validate' %}',
+        data: {
+            last_Name: last_Name,
+
+        },
+        dataType: 'json',
+        success: function (data) {
+            if(data.exists2)
+                $('#id_last_Name').css('border-bottom', 'solid 4px red');
+            else
+                $('#id_last_Name').css('border-bottom', 'solid 4px green');
+
+        }
+
+
+    })
+});
+
+$('#id_telephone').change(function(){
+    let telephone= $(this).val();
+
+    $.ajax({
+        url: '{% url 'meeting-validate' %}',
+        data: {
+            telephone: telephone
+
+        },
+        dataType: 'json',
+        success: function (data) {
+            if(data.exists3)
+                $('#id_telephone').css('border-bottom', 'solid 4px red');
+            else
+                $('#id_telephone').css('border-bottom', 'solid 4px green');
+
+        }
+
+
+    })
+})
+</script>

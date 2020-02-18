@@ -12,4 +12,27 @@ login
            {% include 'forms.html' %}
             <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div><a class="forgot" href="#">Forgot your email or password?</a></form>
     </div>
+    <script>
+    $('#id_username').change(function () {
+        let username = $(this).val();
+
+        $.ajax({
+            url: '/validate/',
+            data:{
+                username:username
+            },
+            dataType: 'json',
+            success: function (data) {
+                if(data.is_taken)
+                    console.log('ok');
+
+                else
+                    $('#id_username').css('border-bottom-color', 'solid 5px green');
+
+
+            }
+        });
+
+    });
+    </script>
 {% endblock %}

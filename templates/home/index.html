@@ -1,8 +1,79 @@
 {% extends 'base.html'%}
+{% load crispy_forms_tags %}
 {% block title %}
 home
 {% endblock %}
+
 {% block main %}
 <h1 class="text-primary text-center text-uppercase">welcome {{ request.user|upper }}</h1>
 
+  <div class="container">
+    <h1 class="text-center"><i>Agenda</i></h1>
+    <hr />
+  <button id="agenda_btn" class="btn btn-md btn-outline-primary hide" style="float: right;">Create</button>
+
+  <div class="col-md-4" style="float: right;" id="agenda">
+      <h5 class="text-center">Add Agenda</h5>
+            <form method="post">
+          {% csrf_token %}
+          {{ form| crispy }}
+          <input type="submit" value="Submit" class="btn btn-block btn-outline-primary">
+      </form>
+  </div>
+
+      <br>
+      <hr>
+  <div class="row">
+      {% for i in lists %}
+          <div class="col-md-3" >
+      <div class="card mb-md-4 box-shadow">
+          <div class="card-header text-center">
+              <b class="card-title">{{ i.title|upper }}</b>
+          </div>
+          <div class="card-body">
+              <h5><span class="fa fa-calendar-o text-center"> &nbsp; {{i.date| date}}</span></h5>
+              <hr>
+              <p class="card-text text-center">
+                  {{i.details|upper}}
+              </p>
+          </div>
+        <hr/>
+
+        {% if request.user.is_superuser %}
+            <form action="{% url 'del' i.id %}" method="POST" style=" padding-right: 4%; padding-bottom: 3%;">
+                {% csrf_token %}
+                <button value="remove" type="submit"  class="btn btn-outline-danger" style="float: right;"><span class="fa fa-trash-o"></span></button>
+            </form>
+
+        {% endif %}
+
+      </div>
+          </div>
+      {% endfor%}
+  </div>
+  </div>
+     {% include 'pagination.html' %}
+    <script>
+    let today;
+    today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+    $('#id_date').datepicker({
+        minDate: today,
+        uiLibrary: 'bootstrap4'});
+
+    $('#agenda').hide();
+    $('#agenda_btn').click(function () {
+        if ($('#agenda:visible').length)
+            $('#agenda').hide(500);
+        else
+            $('#agenda').show(500);
+            $('#agenda_btn').hide(200);
+    });
+    console.log()
+    </script>
+    <style>
+        #agenda_btn:hover{
+            background: #f4476b;
+            border-radius: 30px;
+        }
+    </style>
 {% endblock %}

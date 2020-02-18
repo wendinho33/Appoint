@@ -7,7 +7,10 @@ from django.utils import timezone
 class Todo(models.Model):
     title = models.CharField(max_length=255)
     details = models.TextField()
-    date = models.DateTimeField(default=timezone.now)
+    date = models.DateTimeField()
+
+    class Meta:
+        ordering = ['-date']
 
     def __str__(self):
         return self.title

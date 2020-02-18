@@ -5,4 +5,4 @@ from home.models import Todo
 class TodoForm(ModelForm):
     class Meta:
         model = Todo
-        include = '__all__'
+        fields = '__all__'

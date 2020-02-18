@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic import ListView
-
+from django.http import JsonResponse
 from meeting.forms import AppointmentForm, AddressForm
 from meeting.models import Appointment, Place_Of_Residence
 
@@ -15,6 +15,14 @@ class AddressCreate(LoginRequiredMixin, BSModalCreateView):
     template_name = 'meeting/address.html'
     success_message = 'Address successfully Created'
     success_url = reverse_lazy('meeting-list')
+
+
+def validate_address(request):
+    address = request.GET.get('address', None)
+    data = {
+        'is_taken': Place_Of_Residence.objects.filter(address__iexact=address).exists()
+    }
+    return JsonResponse(data)
 
 
 class AddressUpdate(LoginRequiredMixin, BSModalUpdateView):
@@ -44,6 +52,18 @@ class AppointCreate(LoginRequiredMixin, BSModalCreateView):
     def form_valid(self, form):
         form.instance.staff = self.request.user
         return super().form_valid(form)
+
+
+def validate_name(request):
+    first = request.GET.get('first_Name', None)
+    last = request.GET.get('last_Name', None)
+    tel = request.GET.get('telephone', None)
+    data = {
+        'exists': Appointment.objects.filter(first_Name__iexact=first).exists(),
+        'exists2': Appointment.objects.filter(last_Name__iexact=last).exists(),
+        'exists3': Appointment.objects.filter(telephone__exact=tel).exists(),
+    }
+    return JsonResponse(data)
 
 
 class AppointUpdate(LoginRequiredMixin, BSModalUpdateView):
@@ -87,6 +107,7 @@ class AppointSearch(LoginRequiredMixin, ListView):
             Q(first_Name__icontains=query) | Q(last_Name__icontains=query) | Q(NIC__istartswith=query) | Q(
                 address__region__contains=query) \
             | Q(status__contains=query) | Q(address__address__istartswith=query) | Q(telephone__exact=query) \
-            | Q(reasons__icontains=query)
+            | Q(reasons__icontains=query) | Q(published__month=query) | Q(published__year=query) | Q(
+                published__day=query)
         )
         return object_list
