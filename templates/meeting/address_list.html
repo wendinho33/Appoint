@@ -3,7 +3,7 @@
 Address List
 {% endblock %}
 {% block main %}
-{% if request.user.is_superuser %}
+{% if request.user.is_authenticated %}
 <table class="table table-hover table-dark">
   <thead>
     <tr>
