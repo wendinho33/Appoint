@@ -6,6 +6,56 @@ home
 
 {% block main %}
 <h1 class="text-primary text-center text-uppercase">welcome {{ request.user|upper }}</h1>
+<h2 class="text-center text-uppercase text-warning">latest appointment</h2>
+    <div class="container">
+    <table class="table table-bordered table-dark">
+  <thead>
+    <tr>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Reasons</th>
+      <th scope="col">View</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for foo in appointment %}
+      {% if foo.status == 'pending' %}
+          <tr class="bg-info">
+          <td>{{ foo.first_Name|upper }}</td>
+          <td>{{ foo.last_Name|upper}}</td>
+          <td>{{ foo.reasons|upper }}</td>
+          <td><button class="meeting_detail btn btn-outline-light" data-id="{% url 'meeting-detail' foo.slug %}">View</button></td>
+      {% endif %}
+  </tr>
+      {% if foo.status == 'completed' %}
+      <tr class="bg-success">
+      <td>{{ foo.first_Name|upper }}</td>
+      <td>{{ foo.last_Name|upper}}</td>
+      <td>{{ foo.reasons|upper }}</td>
+      <td><button class="meeting_detail btn btn-outline-light" data-id="{% url 'meeting-detail' foo.slug %}">View</button></td>
+      {% endif %}
+  </tr>
+      {% if foo.status == 'important' %}
+          <tr class="bg-warning">
+          <td>{{ foo.first_Name|upper }}</td>
+          <td>{{ foo.last_Name|upper}}</td>
+          <td>{{ foo.reasons|upper }}</td>
+          <td><button class="meeting_detail btn btn-outline-light" data-id="{% url 'meeting-detail' foo.slug %}">View</button></td>
+      {% endif %}
+  </tr>
+      {% if foo.status == 'follow up' %}
+          <tr class="bg-secondary">
+          <td>{{ foo.first_Name|upper }}</td>
+          <td>{{ foo.last_Name|upper}}</td>
+          <td>{{ foo.reasons|upper }}</td>
+          <td><button class="meeting_detail btn btn-outline-light" data-id="{% url 'meeting-detail' foo.slug %}">View</button></td>
+      {% endif %}
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+    </div>
+
 
   <div class="container">
     <h1 class="text-center"><i>Agenda</i></h1>
@@ -67,7 +117,10 @@ home
             $('#agenda').show(500);
             $('#agenda_btn').hide(200);
     });
-    console.log()
+    $(".meeting_detail").each(function () {
+        $(this).modalForm({formURL: $(this).data('id')});
+    });
+
     </script>
     <style>
         #agenda_btn:hover{

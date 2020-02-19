@@ -40,6 +40,7 @@ def IndexView(request):
             'form': form,
             'lists': todo_list,
             'page_obj': todos,
+            'appointment': Appointment.objects.all().order_by('-published')[:1]
         }
         return render(request, 'home/index.html', page)
 
