@@ -5,9 +5,9 @@ home
 {% endblock %}
 
 {% block main %}
-<h1 class="text-primary text-center text-uppercase">welcome {{ request.user|upper }}</h1>
+<h1 class="text-primary text-center text-uppercase"  id="welcome">welcome {{ request.user|upper }}</h1>
 <h2 class="text-center text-uppercase text-warning">latest appointment</h2>
-    <div class="container">
+    <div class="container" id="appoint_table">
     <table class="table table-bordered table-dark">
   <thead>
     <tr>
@@ -119,6 +119,18 @@ home
     });
     $(".meeting_detail").each(function () {
         $(this).modalForm({formURL: $(this).data('id')});
+    });
+    $(document).ready(function(){
+        $('#welcome').hide(3000);
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            if (scroll > 100){
+                $("#appoint_table").hide(1000)
+            }
+            else {
+                $("#appoint_table").show(1000);
+            }
+        });
     });
 
     </script>

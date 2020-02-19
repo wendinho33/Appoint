@@ -13,7 +13,10 @@
 </head>
 <body>
 <div class="se-pre-con"></div>
-{% include 'header.html' %}
+{% if request.user.is_authenticated %}
+    {% include 'header.html' %}
+{% endif %}
+
 <br>
 
 {% include 'message.html' %}
