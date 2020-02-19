@@ -28,6 +28,7 @@ def user_login(request):
             return redirect('login')
     else:
         if request.user.is_authenticated:
+            messages.info(request, 'you are already logged in')
             return redirect('home')
         else:
             form = LoginForm()
