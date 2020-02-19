@@ -25,69 +25,53 @@
 </form>
 
 <script>
-$('#id_first_Name').change(function(){
-    let first_Name = $(this).val();
+    $('#id_first_Name').keyup(function(){
+        let first_Name = $(this).val();
+        $.ajax({
+            url: '{% url 'meeting-validate' %}',
+            data: {
+                first_Name: first_Name,
+            },
+            dataType: 'json',
+            success: function (data) {
+                if(data.exists)
+                    $('#id_first_Name').css('border-bottom', 'solid 4px red');
+                else
+                    $('#id_first_Name').css('border-bottom', 'solid 4px green');
+            }
+        })
+    });
+    $('#id_last_Name').change(function(){
+        let last_Name = $(this).val();
 
-    $.ajax({
-        url: '{% url 'meeting-validate' %}',
-        data: {
-            first_Name: first_Name,
-
-        },
-        dataType: 'json',
-        success: function (data) {
-            if(data.exists)
-                $('#id_first_Name').css('border-bottom', 'solid 4px red');
-            else
-                $('#id_first_Name').css('border-bottom', 'solid 4px green');
-
-        }
-
-
-    })
-});
-
-$('#id_last_Name').change(function(){
-    let last_Name = $(this).val();
-
-    $.ajax({
-        url: '{% url 'meeting-validate' %}',
-        data: {
-            last_Name: last_Name,
-
-        },
-        dataType: 'json',
-        success: function (data) {
-            if(data.exists2)
-                $('#id_last_Name').css('border-bottom', 'solid 4px red');
-            else
-                $('#id_last_Name').css('border-bottom', 'solid 4px green');
-
-        }
-
-
-    })
-});
-
-$('#id_telephone').change(function(){
-    let telephone= $(this).val();
-
-    $.ajax({
-        url: '{% url 'meeting-validate' %}',
-        data: {
-            telephone: telephone
-
-        },
-        dataType: 'json',
-        success: function (data) {
-            if(data.exists3)
-                $('#id_telephone').css('border-bottom', 'solid 4px red');
-            else
-                $('#id_telephone').css('border-bottom', 'solid 4px green');
-
-        }
-
-
-    })
-})
+        $.ajax({
+            url: '{% url 'meeting-validate' %}',
+            data: {
+                last_Name: last_Name,
+            },
+            dataType: 'json',
+            success: function (data) {
+                if(data.exists2)
+                    $('#id_last_Name').css('border-bottom', 'solid 4px red');
+                else
+                    $('#id_last_Name').css('border-bottom', 'solid 4px green');
+            }
+        })
+    });
+    $('#id_telephone').change(function(){
+        let telephone= $(this).val();
+        $.ajax({
+            url: '{% url 'meeting-validate' %}',
+            data: {
+                telephone: telephone
+            },
+            dataType: 'json',
+            success: function (data) {
+                if(data.exists3)
+                    $('#id_telephone').css('border-bottom', 'solid 4px red');
+                else
+                    $('#id_telephone').css('border-bottom', 'solid 4px green');
+            }
+        })
+    });
 </script>

@@ -19,7 +19,7 @@ def user_login(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, 'welcome' + ' ' + request.user.username)
-                return redirect('meeting-list')
+                return redirect('home')
             else:
                 messages.warning(request, 'please try again')
                 return redirect('login')
@@ -27,9 +27,12 @@ def user_login(request):
             messages.error(request, 'form invalid')
             return redirect('login')
     else:
-        form = LoginForm()
-        dic = {'form': form}
-        return render(request, 'account/login.html', dic)
+        if request.user.is_authenticated:
+            return redirect('home')
+        else:
+            form = LoginForm()
+            dic = {'form': form}
+            return render(request, 'account/login.html', dic)
 
 
 def user_logout(request):
