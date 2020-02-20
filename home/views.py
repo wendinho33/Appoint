@@ -14,7 +14,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 @login_required(login_url='login')
 def IndexView(request):
-    todo_list = Todo.objects.get_queryset().order_by('-date')
+    todo_list = Todo.objects.get_queryset().order_by('-created_at')
     page = request.GET.get('page', 1)
 
     paginator = Paginator(todo_list, 5)

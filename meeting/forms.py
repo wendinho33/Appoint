@@ -6,7 +6,7 @@ from django import forms
 class AppointmentForm(BSModalForm):
     class Meta:
         model = Appointment
-        exclude = ['staff', 'slug', 'published', 'created_at', 'updated_at']
+        exclude = ['staff', 'slug', 'created_at', 'updated_at']
 
 
 class AddressForm(BSModalForm):
