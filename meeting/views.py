@@ -107,7 +107,6 @@ class AppointSearch(LoginRequiredMixin, ListView):
             Q(first_Name__icontains=query) | Q(last_Name__icontains=query) | Q(NIC__istartswith=query) | Q(
                 address__region__contains=query) \
             | Q(status__contains=query) | Q(address__address__istartswith=query) | Q(telephone__exact=query) \
-            | Q(reasons__icontains=query) | Q(published__month=query) | Q(published__year=query) | Q(
-                published__day=query)
+            | Q(reasons__icontains=query)
         )
         return object_list
