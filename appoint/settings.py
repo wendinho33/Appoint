@@ -32,6 +32,8 @@ SESSION_COOKIE_AGE = 600
 SESSION_AT_BROWSER_CLOSE = True
 # Application definition
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 INSTALLED_APPS = [
     'crispy_forms',
     'phonenumber_field',
