@@ -24,8 +24,7 @@ ENVIRONMENT = os.environ.get('ENVIRONMENT', default='development')
 SECRET_KEY = '+7lfkqjd3ns0@!u@myu74^n!+#0b4$w$*9+#)r1v0x@x#8%mg3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+DEBUG = False
 ALLOWED_HOSTS = ['appointb.herokuapp.com']
 
 SESSION_COOKIE_AGE = 600
@@ -143,6 +142,7 @@ if ENVIRONMENT == 'production':
     SECURE_BROWSER_XSS_FILTER = True
     X_FRAME_OPTIONS = 'DENY'
     SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
