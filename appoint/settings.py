@@ -24,7 +24,7 @@ ENVIRONMENT = os.environ.get('ENVIRONMENT', default='development')
 SECRET_KEY = '+7lfkqjd3ns0@!u@myu74^n!+#0b4$w$*9+#)r1v0x@x#8%mg3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['appointb.herokuapp.com', 'localhost', '0.0.0.0', '127.0.0.1', '*']
 
