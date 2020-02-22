@@ -26,7 +26,7 @@ SECRET_KEY = '+7lfkqjd3ns0@!u@myu74^n!+#0b4$w$*9+#)r1v0x@x#8%mg3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['appointb.herokuapp.com']
+ALLOWED_HOSTS = ['appointb.herokuapp.com', '*']
 
 SESSION_COOKIE_AGE = 600
 SESSION_AT_BROWSER_CLOSE = True
