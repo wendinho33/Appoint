@@ -20,5 +20,9 @@ urlpatterns = [
     path('', include('account.urls')),
     path('home/', include('home.urls')),
     path('appoint/', include('meeting.urls')),
-    path('admin/', admin.site.urls),
+    path('etoila/', admin.site.urls),
 ]
+
+admin.site.site_header = "Appoint"
+admin.site.site_title = "Appoint"
+admin.site.index_title = "Appoint Administration"
