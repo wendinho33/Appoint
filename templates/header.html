@@ -24,6 +24,12 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'users' %}"><span class="fa fa-user-circle">Users</span></a>
               </li>
+                {% if request.user.is_superuser %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/etoila/"><span class="fa fa-arrow-circle-o-right">Admin</span></a>
+                    </li>
+                {% endif %}
+
             </ul>
               <form class="form-inline mt-2 mt-md-0" action="{% url 'search_meeting' %}" method="get" >
                   <input class="form-control mr-sm-2" type="text" placeholder="Search" name="q" aria-label="Search" required>
