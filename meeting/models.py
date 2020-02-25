@@ -72,7 +72,7 @@ class Appointment(models.Model):
     first_Name = models.CharField(max_length=255)
     last_Name = models.CharField(max_length=255)
     NIC = models.CharField(max_length=12, default='xxxxx')
-    telephone = PhoneNumberField(blank=True, default='11111111', max_length=8)
+    telephone = PhoneNumberField(blank=True, default='11111111')
     address = models.ForeignKey(Place_Of_Residence, on_delete=models.CASCADE)
     children = models.CharField(max_length=12, choices=CHILDREN_NUMBER_CHOICES, default='na')
     marital_Status = models.CharField(max_length=20, choices=MARITAL_STATUS, default='single')
