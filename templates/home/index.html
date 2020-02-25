@@ -88,7 +88,10 @@ home
           </div>
           {% if request.user.is_superuser %}
               <hr/>
-            <form action="{% url 'del' i.id %}" method="POST" style=" padding-right: 4%; padding-bottom: 3%;">
+              <div style="float:left; padding-left: 4%;" >
+                  <button class="todo_edit btn btn-outline-info" data-id="{% url 'todo_update' i.pk %}" style="float: left"><span class="fa fa-eye"></span></button>
+              </div>
+            <form action="{% url 'del' i.id %}" method="POST" style=" padding-right: 4%;">
                 {% csrf_token %}
                 <button value="remove" type="submit"  class="btn btn-outline-danger" style="float: right;"><span class="fa fa-trash-o"></span></button>
             </form>
@@ -119,6 +122,9 @@ home
     $(".meeting_detail").each(function () {
         $(this).modalForm({formURL: $(this).data('id')});
     });
+    $(".todo_edit").each(function () {
+            $(this).modalForm({formURL: $(this).data('id')});
+        });
     $(document).ready(function(){
         $('#welcome').hide(3000);
         $(window).scroll(function () {

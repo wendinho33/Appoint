@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views.generic import ListView
+from django.views.generic.edit import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from meeting.models import Appointment
 from django.contrib.auth.models import User
@@ -8,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from home.models import Todo
 from home.forms import TodoForm
+from django.urls import reverse_lazy
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
@@ -50,6 +52,14 @@ def remove(request, todo_id):
     todo.delete()
     messages.warning(request, 'Task completed and deleted')
     return redirect('home')
+
+
+class TodoUpdate(UpdateView, LoginRequiredMixin):
+    login_url = 'login'
+    template_name = 'home/update.html'
+    form_class = TodoForm
+    queryset = Todo.objects.all()
+    success_url = reverse_lazy('home')
 
 
 class UsersView(LoginRequiredMixin, ListView):
