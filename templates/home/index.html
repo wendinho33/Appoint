@@ -91,7 +91,7 @@ home
               <div style="float:left; padding-left: 4%;" >
                   <button class="todo_edit btn btn-outline-info" data-id="{% url 'todo_update' i.pk %}" style="float: left"><span class="fa fa-eye"></span></button>
               </div>
-            <form action="{% url 'del' i.id %}" method="POST" style=" padding-right: 4%;">
+            <form action="{% url 'del' i.id %}" method="POST" style=" padding-right: 4%; padding-bottom: 3%;">
                 {% csrf_token %}
                 <button value="remove" type="submit"  class="btn btn-outline-danger" style="float: right;"><span class="fa fa-trash-o"></span></button>
             </form>
@@ -125,19 +125,6 @@ home
     $(".todo_edit").each(function () {
             $(this).modalForm({formURL: $(this).data('id')});
         });
-    $(document).ready(function(){
-        $('#welcome').hide(3000);
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            if (scroll > 100){
-                $("#appoint_table").hide(1000)
-            }
-            else {
-                $("#appoint_table").show(1000);
-            }
-        });
-    });
-
     </script>
     <style>
         #agenda_btn:hover{
