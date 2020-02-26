@@ -105,9 +105,16 @@ home
     <script>
     let today;
     today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+
     $('#id_date').datepicker({
+        container:'#id_date',
         minDate: today,
-        uiLibrary: 'bootstrap4'});
+        modal: true,
+        header: true,
+        footer: true,
+        showotherMonths: true});
+
+
 
     $('#agenda').hide();
     $('#agenda_btn').click(function () {

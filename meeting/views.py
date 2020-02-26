@@ -37,7 +37,7 @@ class AddressUpdate(LoginRequiredMixin, BSModalUpdateView):
 class AddressList(LoginRequiredMixin, ListView):
     login_url = 'login'
     model = Place_Of_Residence
-    queryset = Place_Of_Residence.objects.all()
+    queryset = Place_Of_Residence.objects.all().order_by('address')
     template_name = 'meeting/address_list.html'
     context_object_name = 'addresses'
 

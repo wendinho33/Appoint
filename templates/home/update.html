@@ -18,8 +18,16 @@
   </div>
 
 </form>
-
 <script>
+    let day;
+    day = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+
     $('#id_date').datepicker({
-        uiLibrary: 'bootstrap4'});
+        minDate: day,
+        showOtherMonths:true,
+        modal: true,
+        header: true,
+        footer: true,
+        value: ''
+    })
 </script>

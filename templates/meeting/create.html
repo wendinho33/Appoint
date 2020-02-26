@@ -25,6 +25,22 @@
 </form>
 
 <script>
+    $.date = function() {
+        let date = new Date();
+        let day = date.getDate();
+        let month = date.getMonth()+1;
+        let year = date.getFullYear();
+        let d =  month + "/" + day + "/" + year;
+        return d;
+    };
+    $('#id_published').datepicker({
+        showOtherMonths:true,
+        modal: true,
+        header: true,
+        footer: true,
+        value: $.date,
+
+    });
     $('#id_first_Name').keyup(function(){
         let first_Name = $(this).val();
         $.ajax({
