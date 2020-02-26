@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from home.models import Todo
 from home.forms import TodoForm
+from bootstrap_modal_forms.generic import BSModalDeleteView
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -47,11 +48,13 @@ def IndexView(request):
         return render(request, 'home/index.html', page)
 
 
-def remove(request, todo_id):
-    todo = Todo.objects.get(id=todo_id)
-    todo.delete()
-    messages.warning(request, 'Task completed and deleted')
-    return redirect('home')
+class Todo_Delete(LoginRequiredMixin, BSModalDeleteView):
+    login_url = 'login'
+    model = Todo
+    template_name = 'home/delete.html'
+    queryset = Todo.objects.all()
+    success_message = 'Successfully Deleted'
+    success_url = reverse_lazy('home')
 
 
 class TodoUpdate(UpdateView, LoginRequiredMixin):

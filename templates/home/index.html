@@ -88,11 +88,9 @@ home
           {% if request.user.is_superuser %}
               <hr/>
               <div style="float:left; padding-left: 4%; padding-bottom: 4%;" >
-                  <button class="todo_edit btn btn-outline-info" data-id="{% url 'todo_update' i.pk %}" style="float: left"><span class="fa fa-eye"></span></button>
-              </div><form action="{% url 'del' i.id %}" method="POST" style=" padding-right: 4%; padding-bottom: 3%;">
-                {% csrf_token %}
-                <button value="remove" type="submit"  class="btn btn-outline-danger" style="float: right;"><span class="fa fa-trash-o"></span></button>
-            </form>
+                  <button class="todo_edit btn btn-outline-info"  style="float: left" data-id="{% url 'todo_update' i.pk %}"><span class="fa fa-eye"></span></button>
+                  <button value="remove"  class=" todo_delete btn btn-outline-danger" style="float: right;" data-id="{% url 'del' i.pk %}" ><span class="fa fa-trash-o"></span></button>
+              </div>
 
         {% endif %}
 
@@ -130,6 +128,10 @@ home
     $(".todo_edit").each(function () {
             $(this).modalForm({formURL: $(this).data('id')});
         });
+    $(".todo_delete").each(function () {
+            $(this).modalForm({formURL: $(this).data('id')});
+            });
+
     </script>
     <style>
         #agenda_btn:hover{
