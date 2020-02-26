@@ -71,7 +71,7 @@ class Appointment(models.Model):
     slug = models.SlugField(max_length=255, blank=True, unique=True)
     first_Name = models.CharField(max_length=255)
     last_Name = models.CharField(max_length=255)
-    NIC = models.CharField(max_length=255)
+    NIC = models.CharField(max_length=255, default='xxxx')
     telephone = PhoneNumberField(blank=True)
     address = models.ForeignKey(Place_Of_Residence, on_delete=models.CASCADE)
     children = models.CharField(max_length=12, choices=CHILDREN_NUMBER_CHOICES, default='0')

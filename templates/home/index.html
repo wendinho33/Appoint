@@ -1,5 +1,4 @@
 {% extends 'base.html'%}
-{% load crispy_forms_tags %}
 {% block title %}
 home
 {% endblock %}
@@ -88,10 +87,9 @@ home
           </div>
           {% if request.user.is_superuser %}
               <hr/>
-              <div style="float:left; padding-left: 4%;" >
+              <div style="float:left; padding-left: 4%; padding-bottom: 4%;" >
                   <button class="todo_edit btn btn-outline-info" data-id="{% url 'todo_update' i.pk %}" style="float: left"><span class="fa fa-eye"></span></button>
-              </div>
-            <form action="{% url 'del' i.id %}" method="POST" style=" padding-right: 4%; padding-bottom: 3%;">
+              </div><form action="{% url 'del' i.id %}" method="POST" style=" padding-right: 4%; padding-bottom: 3%;">
                 {% csrf_token %}
                 <button value="remove" type="submit"  class="btn btn-outline-danger" style="float: right;"><span class="fa fa-trash-o"></span></button>
             </form>
