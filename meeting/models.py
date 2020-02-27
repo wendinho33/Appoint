@@ -26,6 +26,7 @@ class Place_Of_Residence(models.Model):
 
 class Appointment(models.Model):
     CHILDREN_NUMBER_CHOICES = (
+        ('Na', 'Na'),
         ('0', '0'),
         ('1', '1'),
         ('2', '2'),
@@ -74,7 +75,7 @@ class Appointment(models.Model):
     NIC = models.CharField(max_length=255, default='xxxx')
     telephone = PhoneNumberField(blank=True)
     address = models.ForeignKey(Place_Of_Residence, on_delete=models.CASCADE)
-    children = models.CharField(max_length=12, choices=CHILDREN_NUMBER_CHOICES, default='0')
+    children = models.CharField(max_length=12, choices=CHILDREN_NUMBER_CHOICES, default='Na')
     marital_Status = models.CharField(max_length=20, choices=MARITAL_STATUS, default='single')
     reasons = models.CharField(max_length=255, choices=REASON_CHOICES, default='')
     remarks = models.TextField(blank=True, )
